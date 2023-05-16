@@ -1,3 +1,2 @@
-# dokter_dirumah
-
-A new Flutter project.
+# dokterdirumah
+This is a flutter project for self medication of common sickness and symptoms.
