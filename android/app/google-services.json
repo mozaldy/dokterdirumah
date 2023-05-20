@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1010107276606",
+    "project_id": "dokterdirumah-43173",
+    "storage_bucket": "dokterdirumah-43173.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1010107276606:android:f2f972c98afc39ec8d206f",
+        "android_client_info": {
+          "package_name": "com.example.dokter_dirumah"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1010107276606-vq9dpal7nbe8pn7g8ep4847dpfdeddih.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCQ7OviPFN6ox_cNtfvDCUieYB1BcdIgsw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1010107276606-vq9dpal7nbe8pn7g8ep4847dpfdeddih.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
