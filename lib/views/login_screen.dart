@@ -1,9 +1,9 @@
-import 'package:dokter_dirumah/screens/home_screen.dart';
-import 'package:dokter_dirumah/screens/welcome_screen.dart';
+import 'package:dokter_dirumah/views/welcome_screen.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import '../controlllers/auth.dart';
 import '../widgets/textinput.dart';
-import '../screens/home_screen.dart';
+import '../widgets/static.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -23,24 +23,30 @@ class _LoginScreenState extends State<LoginScreen> {
     _passwordController.dispose();
   }
 
+  void loginUser() async {
+    AuthController controller = AuthController();
+    String res = await controller.loginUser(
+        email: _emailController.text, password: _passwordController.text);
+    showSnackBar(context, res);
+  }
+
   @override
   Widget build(BuildContext context) {
     final double width = MediaQuery.of(context).size.width;
     final double height = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      body: ListView(
-        scrollDirection: Axis.horizontal,
-        children: [
-          const WelcomeScreen(),
-          SizedBox(
-            height: height,
-            width: width,
-            child: Center(
+      body: ListView(scrollDirection: Axis.horizontal, children: [
+        const WelcomeScreen(),
+        SizedBox(
+          height: height,
+          width: width,
+          child: Center(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                const AuthLogo(title: 'Login'),
                 TextInput(
                   textEditingController: _emailController,
                   hintText: 'Email',
@@ -53,35 +59,33 @@ class _LoginScreenState extends State<LoginScreen> {
                   isPassword: true,
                 ),
                 CustomButtom(
-                    buttonColor: Colors.white,
-                    textColor: Colors.red,
-                    text: 'Login',
-                    onPress: () {
-                      if (_emailController.text.isNotEmpty &&
-                          _passwordController.text.length > 6) {
-                        login();
-                      } else {
-                        debugPrint("Terjadi kesalahan");
-                      }
-                    }),
-                CustomButtom(
                     buttonColor: Colors.red,
                     textColor: Colors.white,
-                    text: 'Registrasi',
+                    text: 'Login',
                     onPress: () {
-                      Navigator.pushNamed(context, '/register');
-                    })
+                      loginUser();
+                    }),
+                const SizedBox(
+                  height: 10,
+                ),
+                RichText(
+                    text: TextSpan(
+                        style: const TextStyle(color: Colors.black),
+                        children: <TextSpan>[
+                      const TextSpan(text: 'Belum punya akun? '),
+                      TextSpan(
+                          text: 'Register',
+                          style: const TextStyle(color: Colors.blue),
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = () {
+                              Navigator.pushNamed(context, '/register');
+                            })
+                    ])),
               ],
             ),
-                  ),
           ),
+        ),
       ]),
     );
-  }
-
-  Future<void> login() async {
-    final auth = FirebaseAuth.instance;
-    auth.signInWithEmailAndPassword(
-        email: _emailController.text, password: _passwordController.text);
   }
 }

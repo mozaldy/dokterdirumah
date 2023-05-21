@@ -1,10 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'auth/login.dart';
-import 'auth/register.dart';
-import 'screens/home_screen.dart';
-import 'screens/welcome_screen.dart';
+import 'views/login_screen.dart';
+import 'views/register_screen.dart';
+import 'views/home_screen.dart';
 
 main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,7 +18,7 @@ class DokterDirumah extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'SelfDiagnose',
-      home: StreamBuilder<User?>(
+      home: StreamBuilder<User?>( // Persisting Auth State
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (context, AsyncSnapshot<User?> snapshot) {
           if (snapshot.hasData && snapshot.data != null) {

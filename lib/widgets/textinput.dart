@@ -19,7 +19,7 @@ class TextInput extends StatelessWidget {
       borderSide: Divider.createBorderSide(context),
     );
 
-    return Container(
+    return SizedBox(
       width: 300,
       child: TextField(
         controller: textEditingController,
@@ -58,7 +58,7 @@ class CustomButtom extends StatelessWidget {
         style: ElevatedButton.styleFrom(
           backgroundColor: buttonColor,
           foregroundColor: textColor,
-          fixedSize: Size(300, 20,),
+          fixedSize: const Size(300, 20,),
           padding: const EdgeInsets.fromLTRB(30, 10, 30, 10),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20)

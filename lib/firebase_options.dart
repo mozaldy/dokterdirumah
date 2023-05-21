@@ -17,24 +17,15 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      throw UnsupportedError(
-        'DefaultFirebaseOptions have not been configured for web - '
-        'you can reconfigure this by running the FlutterFire CLI again.',
-      );
+      return web;
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
         return android;
       case TargetPlatform.iOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for ios - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return ios;
       case TargetPlatform.macOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for macos - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return macos;
       case TargetPlatform.windows:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for windows - '
@@ -52,11 +43,41 @@ class DefaultFirebaseOptions {
     }
   }
 
+  static const FirebaseOptions web = FirebaseOptions(
+    apiKey: 'AIzaSyCLh-oMSOI_OHxNSVlqmbRKoOWGsHTC-FM',
+    appId: '1:1010107276606:web:a8d8f3477eb8047b8d206f',
+    messagingSenderId: '1010107276606',
+    projectId: 'dokterdirumah-43173',
+    authDomain: 'dokterdirumah-43173.firebaseapp.com',
+    storageBucket: 'dokterdirumah-43173.appspot.com',
+    measurementId: 'G-SP9B2X3H64',
+  );
+
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyCQ7OviPFN6ox_cNtfvDCUieYB1BcdIgsw',
     appId: '1:1010107276606:android:f2f972c98afc39ec8d206f',
     messagingSenderId: '1010107276606',
     projectId: 'dokterdirumah-43173',
     storageBucket: 'dokterdirumah-43173.appspot.com',
+  );
+
+  static const FirebaseOptions ios = FirebaseOptions(
+    apiKey: 'AIzaSyCTv6gjzCZEeC1mPSA0k3boRpSmYDKvSB8',
+    appId: '1:1010107276606:ios:61ab1825f3c168008d206f',
+    messagingSenderId: '1010107276606',
+    projectId: 'dokterdirumah-43173',
+    storageBucket: 'dokterdirumah-43173.appspot.com',
+    iosClientId: '1010107276606-gk0me6nggq0a4goqn6267v0jmglgb0fp.apps.googleusercontent.com',
+    iosBundleId: 'com.example.dokterDirumah',
+  );
+
+  static const FirebaseOptions macos = FirebaseOptions(
+    apiKey: 'AIzaSyCTv6gjzCZEeC1mPSA0k3boRpSmYDKvSB8',
+    appId: '1:1010107276606:ios:61ab1825f3c168008d206f',
+    messagingSenderId: '1010107276606',
+    projectId: 'dokterdirumah-43173',
+    storageBucket: 'dokterdirumah-43173.appspot.com',
+    iosClientId: '1010107276606-gk0me6nggq0a4goqn6267v0jmglgb0fp.apps.googleusercontent.com',
+    iosBundleId: 'com.example.dokterDirumah',
   );
 }
