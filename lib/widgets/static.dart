@@ -7,7 +7,7 @@ class AuthLogo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      children:  [
+      children: [
         const Icon(
           Icons.local_hospital,
           size: 150,
@@ -36,3 +36,7 @@ showSnackBar(BuildContext context, String text) {
     ),
   );
 }
+
+const primaryColor = Colors.red;
+const backgroundColor = Colors.white;
+var secondaryColor = Colors.red[100];
