@@ -27,7 +27,6 @@ class AuthController {
     if (email.isNotEmpty && password.length > 6 && username.isNotEmpty) {
       UserCredential cred = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
-
       model.User user = model.User(
           uid: cred.user!.uid, email: email, username: username, dokter: false);
 
@@ -37,5 +36,15 @@ class AuthController {
       res = 'Input kurang tepat!';
     }
     return res;
+  }
+
+  // get user details
+  Future<model.User> getUserDetails() async {
+    User currentUser = _auth.currentUser!;
+
+    DocumentSnapshot documentSnapshot =
+        await _firestore.collection('users').doc(currentUser.uid).get();
+
+    return model.User.fromSnap(documentSnapshot);
   }
 }

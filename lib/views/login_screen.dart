@@ -27,7 +27,7 @@ class _LoginScreenState extends State<LoginScreen> {
     AuthController controller = AuthController();
     String res = await controller.loginUser(
         email: _emailController.text, password: _passwordController.text);
-    showSnackBar(context, res);
+    if (res != 'Success') showSnackBar(context, res);
   }
 
   @override

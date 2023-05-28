@@ -3,7 +3,6 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import '../controlllers/auth.dart';
 import '../widgets/textinput.dart';
-import '../widgets/static.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -23,9 +22,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
         email: _emailController.text,
         password: _passwordController.text,
         username: _usernameController.text);
-    if (res == 'Success'){
+    registrasiHandler(res);
+  }
+
+  void registrasiHandler(res) {
+    if (res == 'Success') {
       Navigator.pop(context);
-    } else{
+    } else {
       showSnackBar(context, res);
     }
   }
@@ -56,8 +59,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
               isPassword: true,
             ),
             CustomButtom(
-                buttonColor: Colors.red,
-                textColor: Colors.white,
+                buttonColor: primaryColor,
+                textColor: backgroundColor,
                 text: 'Register',
                 onPress: () {
                   registrasiUser();

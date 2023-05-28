@@ -39,4 +39,4 @@ showSnackBar(BuildContext context, String text) {
 
 const primaryColor = Colors.red;
 const backgroundColor = Colors.white;
-var secondaryColor = Colors.red[100];
+var secondaryColor = Colors.red[200];

@@ -1,8 +1,14 @@
+import 'package:dokter_dirumah/providers/user_provider.dart';
+import 'package:dokter_dirumah/views/home_screen/add_disease_screen.dart';
+import 'package:dokter_dirumah/model/user.dart' as model;
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import './home_screen.dart';
+import 'package:provider/provider.dart';
+import './home_screen/main_screen.dart';
+import './home_screen/profile_screen.dart';
+import './home_screen/search_screen.dart';
 import '../widgets/static.dart';
-
 
 class Layout extends StatefulWidget {
   const Layout({Key? key}) : super(key: key);
@@ -15,18 +21,24 @@ class _LayoutState extends State<Layout> {
   int _page = 0;
   late PageController pageController; // for tabs animation
   List<Widget> homeScreenItems = [
-  const HomeScreen(),
-  // const SearchScreen(),
-  // const AddPostScreen(),
-  // ProfileScreen(
-  //   uid: FirebaseAuth.instance.currentUser!.uid,
-  // ),
-];
+    const MainScreen(),
+    const SearchScreen(),
+    const AddDisease(),
+    ProfileScreen(
+      uid: FirebaseAuth.instance.currentUser!.uid,
+    ),
+  ];
 
   @override
   void initState() {
     super.initState();
     pageController = PageController();
+    addData();
+  }
+
+  addData() async {
+    UserProvider _userProvider = Provider.of(context, listen: false);
+    await _userProvider.refreshUser();
   }
 
   @override
@@ -43,21 +55,24 @@ class _LayoutState extends State<Layout> {
 
   void navigationTapped(int page) {
     //Animating Page
-    pageController.jumpToPage(page);
+    pageController.animateToPage(
+      page,
+      duration: const Duration(milliseconds: 300),
+      curve: Curves.ease,
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: PageView(
-        children: homeScreenItems,
         controller: pageController,
         onPageChanged: onPageChanged,
+        children: homeScreenItems,
       ),
       bottomNavigationBar: CupertinoTabBar(
         backgroundColor: primaryColor,
         items: <BottomNavigationBarItem>[
-
           BottomNavigationBarItem(
             icon: Icon(
               Icons.home,
@@ -81,21 +96,12 @@ class _LayoutState extends State<Layout> {
               label: '',
               backgroundColor: backgroundColor),
           BottomNavigationBarItem(
-            icon: Icon(
-              Icons.favorite,
-              color: (_page == 3) ? backgroundColor : secondaryColor,
-            ),
-            label: '',
-            backgroundColor: backgroundColor,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.person,
-              color: (_page == 4) ? backgroundColor : secondaryColor,
-            ),
-            label: '',
-            backgroundColor: backgroundColor,
-          ),
+              icon: Icon(
+                Icons.person,
+                color: (_page == 3) ? backgroundColor : secondaryColor,
+              ),
+              label: '',
+              backgroundColor: backgroundColor),
         ],
         onTap: navigationTapped,
         currentIndex: _page,
