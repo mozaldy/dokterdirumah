@@ -1,3 +1,4 @@
+import 'package:dokter_dirumah/widgets/static.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -23,7 +24,7 @@ class DokterDirumah extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => UserProvider(),),
       ],
       child: MaterialApp(
-        title: 'SelfDiagnose',
+        title: 'Dokter Dirumah',
         home: StreamBuilder<User?>(
           // Persisting Auth State
           stream: FirebaseAuth.instance.authStateChanges(),
@@ -38,8 +39,9 @@ class DokterDirumah extends StatelessWidget {
             return const LoginScreen();
           },
         ),
+        debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          primarySwatch: Colors.blue,
+          primarySwatch: primaryColor,
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
         routes: {

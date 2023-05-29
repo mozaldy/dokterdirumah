@@ -1,8 +1,9 @@
-import 'package:dokter_dirumah/views/home_screen/add_disease_screen.dart';
-import 'package:dokter_dirumah/widgets/static.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dokter_dirumah/widgets/cards.dart';
+import 'package:dokter_dirumah/model/user.dart' as model;
+import 'package:dokter_dirumah/providers/user_provider.dart';
+import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -12,13 +13,34 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  void onPressed() {
-  }
+  void onPressed() {}
 
   @override
   Widget build(BuildContext context) {
+    model.User user = Provider.of<UserProvider>(context).getUser;
+
     return Scaffold(
-      body: const Center(child: Text('Ini adalah Main!')),
-    );
+        body: StreamBuilder(
+      stream: FirebaseFirestore.instance.collection('diseases').snapshots(),
+      builder: (context,
+          AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+
+        return ListView.builder(
+            itemCount: snapshot.data!.docs.length,
+            itemBuilder: ((context, index) {
+              if (index == 0) {
+                return HelloCard(user: user);
+              }
+              return DiseaseCard(
+                data: snapshot.data!.docs[index - 1].data(),
+              );
+            }));
+      },
+    ));
   }
 }
