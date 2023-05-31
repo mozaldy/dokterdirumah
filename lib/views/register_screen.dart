@@ -1,7 +1,7 @@
 import 'package:dokter_dirumah/widgets/static.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import '../controlllers/auth.dart';
+import '../controllers/auth.dart';
 import '../widgets/textinput.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -58,6 +58,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               textInputType: TextInputType.emailAddress,
               isPassword: true,
             ),
+
             CustomButtom(
                 buttonColor: primaryColor,
                 textColor: backgroundColor,

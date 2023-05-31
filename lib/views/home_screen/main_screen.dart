@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dokter_dirumah/widgets/cards.dart';
 import 'package:dokter_dirumah/model/user.dart' as model;
+import 'package:dokter_dirumah/model/disease.dart';
 import 'package:dokter_dirumah/providers/user_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
@@ -29,15 +30,17 @@ class _MainScreenState extends State<MainScreen> {
             child: CircularProgressIndicator(),
           );
         }
-
         return ListView.builder(
-            itemCount: snapshot.data!.docs.length,
+            itemCount: snapshot.data!.docs.length + 1,
             itemBuilder: ((context, index) {
               if (index == 0) {
                 return HelloCard(user: user);
               }
+              Disease disease = Disease.fromSnap(snapshot.data!.docs[index - 1]);
               return DiseaseCard(
-                data: snapshot.data!.docs[index - 1].data(),
+                // data: snapshot.data!.docs[index - 1].data(),
+                disease: disease,
+                user: user,
               );
             }));
       },

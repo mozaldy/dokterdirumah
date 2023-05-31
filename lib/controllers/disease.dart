@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:uuid/uuid.dart';
 import '../model/user.dart' as model;
@@ -18,7 +17,7 @@ class DiseaseController {
     Disease disease = Disease(
         uid: user.uid,
         idPenyakit: newId,
-        username: user.username,
+        dokter: user.username,
         namaPenyakit: namaPenyakit,
         deskripsiPenyakit: deskripsi,
         gejala: gejala,
@@ -30,7 +29,8 @@ class DiseaseController {
         namaPenyakit.isNotEmpty &&
         deskripsi.isNotEmpty &&
         gejala.isNotEmpty &&
-        perawatan.isNotEmpty) {
+        perawatan.isNotEmpty &&
+        obat.isNotEmpty) {
       _firestore
           .collection('diseases')
           .doc(disease.idPenyakit)
@@ -40,5 +40,9 @@ class DiseaseController {
       res = 'Error, Input ada yang kosong!';
     }
     return res;
+  }
+
+  void deleteDisease(idPenyakit) {
+    _firestore.collection('diseases').doc(idPenyakit).delete();
   }
 }

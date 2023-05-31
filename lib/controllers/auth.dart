@@ -38,6 +38,27 @@ class AuthController {
     return res;
   }
 
+  Future<String> updateUser(
+      {required username, required email, required password, required oldPassword}) async {
+    User user = _auth.currentUser!;
+    String res = "Error";
+    if (email.isNotEmpty && password.length > 6 && username.isNotEmpty) {
+      _firestore
+          .collection('users')
+          .doc(user.uid)
+          .update({'username': username, 'email': email});
+
+      await user.updateEmail(email);
+      await user.reauthenticateWithCredential(
+          EmailAuthProvider.credential(email: email, password: oldPassword));
+      await user.updatePassword(password);
+      res = 'Success';
+    } else {
+      res = 'Input kurang tepat!';
+    }
+    return res;
+  }
+
   // get user details
   Future<model.User> getUserDetails() async {
     User currentUser = _auth.currentUser!;

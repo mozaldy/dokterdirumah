@@ -1,4 +1,4 @@
-import 'package:dokter_dirumah/controlllers/disease.dart';
+import 'package:dokter_dirumah/controllers/disease.dart';
 import 'package:dokter_dirumah/model/user.dart' as model;
 import 'package:flutter/material.dart';
 import 'package:dokter_dirumah/widgets/static.dart';

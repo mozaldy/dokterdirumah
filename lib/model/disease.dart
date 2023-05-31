@@ -3,18 +3,18 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class Disease {
   final String idPenyakit;
   final String uid;
-  final String username;
+  final String dokter;
   final String namaPenyakit;
   final String deskripsiPenyakit;
   final String gejala;
   final String perawatan;
   final String obat;
-  final DateTime tanggal;
+  final tanggal;
 
   const Disease(
       {required this.uid,
       required this.idPenyakit,
-      required this.username,
+      required this.dokter,
       required this.namaPenyakit,
       required this.deskripsiPenyakit,
       required this.gejala,
@@ -23,9 +23,9 @@ class Disease {
       required this.obat});
 
   Map<String, dynamic> toJson() => {
-        'dokter': username,
+        'dokter': dokter,
         'uid': uid,
-        'nama_penyakit': namaPenyakit,
+        'namaPenyakit': namaPenyakit,
         'deskripsiPenyakit': deskripsiPenyakit,
         'gejala': gejala,
         'perawatan': perawatan,
@@ -40,7 +40,7 @@ class Disease {
     return Disease(
         idPenyakit: snapshot['idPenyakit'],
         tanggal: snapshot['tanggal'],
-        username: snapshot['username'],
+        dokter: snapshot['dokter'],
         uid: snapshot['uid'],
         namaPenyakit: snapshot['namaPenyakit'],
         deskripsiPenyakit: snapshot['deskripsiPenyakit'],

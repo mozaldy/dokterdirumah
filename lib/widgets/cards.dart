@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:dokter_dirumah/views/home_screen/disease_screen.dart';
 import 'static.dart';
 import 'package:dokter_dirumah/model/user.dart' as model;
+import 'package:dokter_dirumah/model/disease.dart';
 
 class HelloCard extends StatelessWidget {
   final model.User user;
@@ -42,8 +44,9 @@ class HelloCard extends StatelessWidget {
 }
 
 class DiseaseCard extends StatefulWidget {
-  final data;
-  const DiseaseCard({super.key, required this.data});
+  final Disease disease;
+  final model.User user;
+  const DiseaseCard({super.key, required this.disease, required this.user});
 
   @override
   State<DiseaseCard> createState() => _DiseaseCardState();
@@ -52,14 +55,15 @@ class DiseaseCard extends StatefulWidget {
 class _DiseaseCardState extends State<DiseaseCard> {
   @override
   Widget build(BuildContext context) {
-    String namaPenyakit = widget.data['nama_penyakit'].toString();
+    model.User user = widget.user;
+    Disease disease = widget.disease;
     return FractionallySizedBox(
       widthFactor: 0.99,
       child: Container(
-        margin: EdgeInsets.only(top: 5),
+        margin: const EdgeInsets.only(top: 5),
         padding: const EdgeInsets.all(20),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.elliptical(20, 20)),
+          borderRadius: const BorderRadius.all(Radius.elliptical(20, 20)),
           border: Border.all(color: primaryColor, width: 5),
           color: backgroundColor,
         ),
@@ -70,14 +74,29 @@ class _DiseaseCardState extends State<DiseaseCard> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  namaPenyakit,
-                  textScaleFactor: (namaPenyakit.length < 13) ? 3 : 2,
+                  disease.namaPenyakit,
+                  textScaleFactor: (disease.namaPenyakit.length < 13) ? 3 : 2,
                   style: const TextStyle(
                       color: primaryColor,
                       fontWeight: FontWeight.w700,
                       letterSpacing: 3),
                 ),
-                const Icon(Icons.arrow_right, color: primaryColor, size: 50,)
+                InkWell(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => DiseaseScreen(
+                                  user: user,
+                                  disease: disease,
+                                )));
+                  },
+                  child: const Icon(
+                    Icons.arrow_right,
+                    color: primaryColor,
+                    size: 50,
+                  ),
+                )
               ],
             ),
             Row(
@@ -85,7 +104,7 @@ class _DiseaseCardState extends State<DiseaseCard> {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 Text(
-                  "By: Dokter ${widget.data['dokter']}",
+                  "By: Dokter ${disease.dokter}",
                   textScaleFactor: 1,
                   style: const TextStyle(
                       color: primaryColor,

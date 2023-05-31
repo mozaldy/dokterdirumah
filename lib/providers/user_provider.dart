@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:dokter_dirumah/model/user.dart';
-import 'package:dokter_dirumah/controlllers/auth.dart';
+import 'package:dokter_dirumah/controllers/auth.dart';
 
 class UserProvider with ChangeNotifier {
   User? _user;
