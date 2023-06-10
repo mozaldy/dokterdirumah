@@ -36,7 +36,8 @@ class _MainScreenState extends State<MainScreen> {
               if (index == 0) {
                 return HelloCard(user: user);
               }
-              Disease disease = Disease.fromSnap(snapshot.data!.docs[index - 1]);
+              Disease disease =
+                  Disease.fromSnap(snapshot.data!.docs[index - 1]);
               return DiseaseCard(
                 // data: snapshot.data!.docs[index - 1].data(),
                 disease: disease,
