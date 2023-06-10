@@ -11,12 +11,12 @@ class AuthLogo extends StatelessWidget {
         const Icon(
           Icons.local_hospital,
           size: 150,
-          color: Colors.red,
+          color: primaryColor,
         ),
         Text(
           title,
           style: const TextStyle(
-              color: Colors.red,
+              color: primaryColor,
               fontSize: 24,
               fontWeight: FontWeight.w900,
               letterSpacing: 2),
@@ -36,6 +36,7 @@ showSnackBar(BuildContext context, String text) {
     ),
   );
 }
+
 
 const primaryColor = Colors.red;
 const backgroundColor = Colors.white;

@@ -1,7 +1,6 @@
 import 'package:dokter_dirumah/providers/user_provider.dart';
 import 'package:dokter_dirumah/views/home_screen/add_disease_screen.dart';
 import 'package:dokter_dirumah/model/user.dart' as model;
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -40,9 +39,9 @@ class _LayoutState extends State<Layout> {
   }
 
   addData() async {
-    UserProvider _userProvider =
+    UserProvider userProvider =
         Provider.of<UserProvider>(context, listen: false);
-    await _userProvider.refreshUser();
+    await userProvider.refreshUser();
   }
 
   @override
